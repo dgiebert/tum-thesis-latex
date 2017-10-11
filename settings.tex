@@ -1,3 +1,9 @@
+\RequirePackage[l2tabu,orthodox]{nag}
+% Two-sided
+\documentclass[headsepline,footsepline,footinclude=false,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc,BCOR=12mm,DIV=12]{scrbook}
+% one-sided
+%\documentclass[headsepline,footsepline,footinclude=false,oneside,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc]{scrbook} 
+    
 \PassOptionsToPackage{table,svgnames,dvipsnames}{xcolor}
 
 \usepackage[utf8]{inputenc}
@@ -5,15 +11,20 @@
 \usepackage[sc]{mathpazo}
 \usepackage[ngerman,american]{babel}
 \usepackage[autostyle]{csquotes}
+\usepackage[american]{babel}
+\usepackage{xpatch}
+\usefont{T1}{phv}{m}{sc}
 \usepackage[%
   backend=biber,
   url=false,
-  style=alphabetic,
-  maxnames=4,
-  minnames=3,
-  maxbibnames=99,
+  style=authoryear-ibid,
+  citestyle=apa,
+  maxnames=2,
+  minnames=1,
+  maxbibnames=9,
   giveninits,
   uniquename=init]{biblatex} % TODO: adapt citation style
+\DeclareLanguageMapping{american}{american-apa}
 \usepackage{graphicx}
 \usepackage{scrhack} % necessary for listings package
 \usepackage{listings}
@@ -25,6 +36,7 @@
 \usepackage[final]{microtype}
 \usepackage{caption}
 \usepackage[hidelinks]{hyperref} % hidelinks removes colored boxes around references and links
+\usepackage{xpatch}
 
 \bibliography{bibliography}
 
@@ -65,3 +77,46 @@
   keywordstyle=\bfseries\color{TUMBlue},
   stringstyle=\color{TUMAccentGreen}
 }
+
+% Disables the delimiter in parencite
+\renewcommand*{\nameyeardelim}{\space}
+
+% Bold authors
+\xpretobibmacro{author}{\mkbibbold\bgroup}{}{}
+\xapptobibmacro{author}{\egroup}{}{}
+\xpretobibmacro{bbx:editor}{\mkbibbold\bgroup}{}{}
+\xapptobibmacro{bbx:editor}{\egroup}{}{}
+
+% Removes the In:
+% \renewbibmacro{in:}{}
+
+% Correct delimiter
+\renewcommand*{\multinamedelim}{;\space}
+\renewcommand*{\finalnamedelim}{;\space}
+
+% Correct Name order
+\DeclareNameAlias{author}{last-first}
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{citetitle}{#1}
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1} 
+
+% Adds the correct format for articles
+\DeclareFieldFormat[article]{volume}{Vol.\addnbspace #1}
+\DeclareFieldFormat[article]{number}{No.\addnbspace #1}
+\DeclareFieldFormat[article]{year}{{(}#1{)}}
+
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \setunit{\space}%
+  \printfield{year}%
+  \setunit{\space}%
+  \printfield{number}%
+ \setunit{\addcomma\space}%
+  \printfield{eid}}
+
+% Remove space between multiple first names
+\renewrobustcmd*{\bibinitdelim}{}
+
+% Making the title and journal not italic
+\DeclareFieldFormat{title}{#1}
+\DeclareFieldFormat{citetitle}{#1}
+\DeclareFieldFormat{journaltitle}{#1}
