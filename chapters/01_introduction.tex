@@ -8,20 +8,28 @@ Citation test~\parencite{latex}.
 
 \subsection{Subsection}
 
+
+\begin{wraptable}{r}{5.5cm}
+    \centering
+    \begin{tabular}{l l l l}
+      \toprule
+      \multicolumn{1}{c}{\textbf{A}\footnotemark} & \textbf{B} & \textbf{C} & \textbf{D} \\
+      \midrule
+        1\footnotemark & 2 & 1 & 2 \\ \rowcolor{TUMAccentLightBlue!30}
+        2 & 3 & 2 & 3 \\
+        2 & 3 & 2 & 3 \\
+      \bottomrule
+    \end{tabular}
+    \caption[Example table]{An example for a wrapped table.}\label{tab:sample}
+  \end{wraptable}
+  \addtocounter{footnote}{-1}
+  \footnotetext{\url{www.google.de}}
+  \addtocounter{footnote}{1}
+  \footnotetext{\url{www.tum.de}}
 See~\autoref{tab:sample}, \autoref{fig:sample-drawing}, \autoref{fig:sample-plot}, \autoref{fig:sample-listing}.
 
-\begin{table}[htpb]
-  \caption[Example table]{An example for a simple table.}\label{tab:sample}
-  \centering
-  \begin{tabular}{l l l l}
-    \toprule
-      A & B & C & D \\
-    \midrule
-      1 & 2 & 1 & 2 \\
-      2 & 3 & 2 & 3 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\lipsum[1-2]
+
 
 \begin{figure}[htpb]
   \centering
@@ -88,3 +96,18 @@ See~\autoref{tab:sample}, \autoref{fig:sample-drawing}, \autoref{fig:sample-plot
   \end{tabular}
   \caption[Example listing]{An example for a source code listing.}\label{fig:sample-listing}
 \end{figure}
+
+\begin{minipage}[t]{\textwidth}
+\begin{lstlisting}[style=scala, caption=Simple Listing example]
+object Test {
+    def main(args: Array[String]) {
+        var a = 0;
+        // for loop execution with a range
+        for( a <- 1 to 10){
+            println( "Value of a: " + a );
+        }
+    }
+}
+\end{lstlisting}
+\label{overview}
+\end{minipage}

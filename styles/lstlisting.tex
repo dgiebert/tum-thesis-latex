@@ -1,0 +1,53 @@
+% Using Light Monokai theme
+
+% See: https://tex.stackexchange.com/questions/47175/scala-support-in-listings-package
+\lstdefinelanguage{scala}{
+    morekeywords={abstract,case,catch,class,def,%
+      do,else,extends,false,final,finally,%
+      for,if,implicit,import,match,mixin,%
+      new,null,object,override,package,%
+      private,protected,requires,return,sealed,%
+      super,this,throw,trait,true,try,%
+      type,val,var,while,with,yield},
+    otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[n]{/*}{*/},
+    morestring=[b]",
+    morestring=[b]',
+    morestring=[b]"""
+  }
+
+\lstdefinestyle{scala}{
+    xleftmargin=.05\textwidth,               % Center the listing
+    xrightmargin=.05\textwidth,              % Center the listing
+    frame=lrb,                        % Draw the shadowbox as frame
+    belowcaptionskip=-1pt,
+    rulecolor=\color{TUMBlue},                % Color of the frame
+    rulesepcolor=\color{TUMGray!50},        % Color of the shadow
+    language=scala,                			% choose the language of the code
+    numbers=left,                   		% where to put the line-numbers
+    stepnumber=1,                   		% the step between two line-numbers.        
+    numbersep=5pt,                  		% how far the line-numbers are from the code
+    numberstyle=\tiny\color{TUMGray},       % gray and tiny numbers
+    backgroundcolor=\color{background},  	% choose the background color. You must add \usepackage{color}
+    showspaces=false,               		% show spaces adding particular underscores
+    showstringspaces=false,         		% underline spaces within strings
+    showtabs=false,                 		% show tabs within strings adding particular underscores
+    tabsize=4,                      		% sets default tabsize to 4 spaces
+    captionpos=t,                   		% sets the caption-position to bottom
+    breaklines=true,                		% sets automatic line breaking
+    breakatwhitespace=true,         		% sets if automatic breaks should only happen at whitespace
+    title=\lstname,                 		% show the filename of files included with \lstinputlisting;
+    basicstyle=\color{normal}\ttfamily,		% sets font style for the code
+    keywordstyle=\color{keyword}\ttfamily,	% sets color for keywords
+    stringstyle=\color{string}\ttfamily,	% sets color for strings
+    commentstyle=\color{comment}\ttfamily,	% sets color for comments
+    procnamekeys={def, object, class},      % Highlight the function, class, object name
+    procnamestyle=\color{function}          % Color of the highlight
+}
+
+\DeclareCaptionFont{white}{\color{white}} 
+\DeclareCaptionFormat{listing}{% 
+  \colorbox{TUMBlue}{\parbox{\dimexpr0.9\textwidth+2\fboxsep-5pt\relax}{#1#2#3}}} 
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white} 

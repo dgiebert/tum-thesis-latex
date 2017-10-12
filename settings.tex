@@ -12,29 +12,18 @@
 \usepackage[ngerman,american]{babel}
 \usepackage[autostyle]{csquotes}
 \usepackage[american]{babel}
-\usefont{T1}{phv}{m}{sc}
-\usepackage[%
-  backend=biber,
-  url=false,
-  style=authoryear-ibid,
-  citestyle=apa,
-  maxnames=2,
-  minnames=1,
-  maxbibnames=9,
-  giveninits,
-  uniquename=init]{biblatex} % TODO: adapt citation style
-\DeclareLanguageMapping{american}{american-apa}
 \usepackage{graphicx}
 \usepackage{scrhack} % necessary for listings package
-\usepackage{listings}
+\usepackage[procnames]{listings}
 \usepackage{lstautogobble}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \usepackage{booktabs}
 \usepackage[final]{microtype}
-\usepackage{caption}
+\usepackage[justification=centering]{caption}
 \usepackage[hidelinks]{hyperref} % hidelinks removes colored boxes around references and links
+\usepackage{wrapfig} % Wrapfig for tables in text
 
 \bibliography{bibliography}
 
@@ -44,21 +33,6 @@
 % Add table of contents to PDF bookmarks
 \BeforeTOCHead[toc]{{\cleardoublepage\pdfbookmark[0]{\contentsname}{toc}}}
 
-% Define TUM corporate design colors
-% Taken from http://portal.mytum.de/corporatedesign/index_print/vorlagen/index_farben
-\definecolor{TUMBlue}{HTML}{0065BD}
-\definecolor{TUMSecondaryBlue}{HTML}{005293}
-\definecolor{TUMSecondaryBlue2}{HTML}{003359}
-\definecolor{TUMBlack}{HTML}{000000}
-\definecolor{TUMWhite}{HTML}{FFFFFF}
-\definecolor{TUMDarkGray}{HTML}{333333}
-\definecolor{TUMGray}{HTML}{808080}
-\definecolor{TUMLightGray}{HTML}{CCCCC6}
-\definecolor{TUMAccentGray}{HTML}{DAD7CB}
-\definecolor{TUMAccentOrange}{HTML}{E37222}
-\definecolor{TUMAccentGreen}{HTML}{A2AD00}
-\definecolor{TUMAccentLightBlue}{HTML}{98C6EA}
-\definecolor{TUMAccentBlue}{HTML}{64A0C8}
 
 % Settings for pgfplots
 \pgfplotsset{compat=newest}
@@ -67,54 +41,13 @@
   cycle list={TUMBlue\\TUMAccentOrange\\TUMAccentGreen\\TUMSecondaryBlue2\\TUMDarkGray\\},
 }
 
+\usepackage{lipsum}
+
+% Use the colors
+\input{styles/colors}
+
 % Settings for lstlistings
-\lstset{%
-  basicstyle=\ttfamily,
-  columns=fullflexible,
-  autogobble,
-  keywordstyle=\bfseries\color{TUMBlue},
-  stringstyle=\color{TUMAccentGreen}
-}
+\input{styles/lstlisting}
 
-% Disables the delimiter in parencite
-\renewcommand*{\nameyeardelim}{\space}
-
-% Bold authors
-\xpretobibmacro{author}{\mkbibbold\bgroup}{}{}
-\xapptobibmacro{author}{\egroup}{}{}
-\xpretobibmacro{bbx:editor}{\mkbibbold\bgroup}{}{}
-\xapptobibmacro{bbx:editor}{\egroup}{}{}
-
-% Removes the In:
-% \renewbibmacro{in:}{}
-
-% Correct delimiter
-\renewcommand*{\multinamedelim}{;\space}
-\renewcommand*{\finalnamedelim}{;\space}
-
-% Correct Name order
-\DeclareNameAlias{author}{last-first}
-\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{citetitle}{#1}
-\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1} 
-
-% Adds the correct format for articles
-\DeclareFieldFormat[article]{volume}{Vol.\addnbspace #1}
-\DeclareFieldFormat[article]{number}{No.\addnbspace #1}
-\DeclareFieldFormat[article]{year}{{(}#1{)}}
-
-\renewbibmacro*{volume+number+eid}{%
-  \printfield{volume}%
-  \setunit{\space}%
-  \printfield{year}%
-  \setunit{\space}%
-  \printfield{number}%
- \setunit{\addcomma\space}%
-  \printfield{eid}}
-
-% Remove space between multiple first names
-\renewrobustcmd*{\bibinitdelim}{}
-
-% Making the title and journal not italic
-\DeclareFieldFormat{title}{#1}
-\DeclareFieldFormat{citetitle}{#1}
-\DeclareFieldFormat{journaltitle}{#1}
+%input{styles/default}
+\input{styles/i17}
