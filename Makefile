@@ -1,18 +1,14 @@
 FILE := main
 OUT  := build
-THIS_FILE := $(lastword $(MAKEFILE_LIST))
 
 .PHONY: pdf
 pdf:
-	latexmk -synctex=1 -file-line-error -interaction=nonstopmode -outdir=$(OUT) -pdf -halt-on-error $(FILE)
+	latexmk -f -synctex=1 -file-line-error -interaction=nonstopmode -pdf -halt-on-error -outdir=$(OUT) $(FILE)
 
-.PHONY: fresh
-fresh: 
-	@$(MAKE) -f $(THIS_FILE) clean
-	@$(MAKE) -f $(THIS_FILE)
 .PHONY: watch
 watch:
-	latexmk -interaction=nonstopmode -outdir=$(OUT) -pdf -pvc -halt-on-error $(FILE)
+	latexmk -f -synctex=1 -pvc -file-line-error -interaction=nonstopmode -pdf -halt-on-error -outdir=$(OUT) $(FILE)
+
 
 .PHONY: clean
 clean:

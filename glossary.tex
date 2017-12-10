@@ -1,0 +1,16 @@
+\usepackage[
+    xindy,                                      % recommended
+    nonumberlist,                               % do not show page numbers
+    acronym,                                    % generate acronym listing
+    nopostdot,                                  % Remove the dot at the end of glossary descriptions
+    toc                                         % show listings as entries in table of contents
+]{glossaries}
+
+\newacronym{api}{API}{ Application Programming Interface}
+
+\newglossaryentry{sdk}{
+    name        = SDK,
+    description = Software Development Kit
+}
+
+\makeglossaries{}                               % Generate the glossary

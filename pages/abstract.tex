@@ -1,5 +1,16 @@
-\chapter{\abstractname}
+{
+    \cleardoublepage% Move to first page of new chapter
+    \let\clearpage\relax% Don't allow page break
+    \begin{center}
+        \noindent\textbf{\huge\getTitle}
+    \end{center}
+    \vspace{0.25cm}
+    \begin{center}
+        \noindent\textbf{\Large\getAuthor}
+    \end{center}
+    \vspace{-1cm}  
+    \chapter*{\centering \abstractname}
+} \noindent
+Put your abstract here
 
-%TODO: Abstract
-
-
+\noindent\textbf{Keywords}: \getKeywords{}

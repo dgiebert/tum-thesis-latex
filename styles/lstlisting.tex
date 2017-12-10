@@ -1,53 +1,105 @@
-% Using Light Monokai theme
+\usepackage[procnames]{listings}                % Adds listing
+\usepackage{lstautogobble}                      % Removes leading whitespaces in listings adds gobble and autogobble
 
 % See: https://tex.stackexchange.com/questions/47175/scala-support-in-listings-package
 \lstdefinelanguage{scala}{
-    morekeywords={abstract,case,catch,class,def,%
-      do,else,extends,false,final,finally,%
-      for,if,implicit,import,match,mixin,%
-      new,null,object,override,package,%
-      private,protected,requires,return,sealed,%
-      super,this,throw,trait,true,try,%
-      type,val,var,while,with,yield},
-    otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+    morekeywords={                              % Language keywords, add more here
+        abstract,case,catch,class,def,
+        do,else,extends,false,final,finally,
+        for,if,implicit,import,match,mixin,
+        new,null,object,override,package,
+        private,protected,requires,return,sealed,
+        super,this,throw,trait,true,try,
+        type,val,var,while,with,yield},
+    otherkeywords={=>,<-,<\%,<:,>:,\#,@},       % Special operators
     sensitive=true,
-    morecomment=[l]{//},
-    morecomment=[n]{/*}{*/},
-    morestring=[b]",
-    morestring=[b]',
-    morestring=[b]"""
+    morecomment=[l]{//},                        % Comments
+    morecomment=[n]{/*}{*/},                    % Comments
+    morestring=[b]",                            % Detect different strings
+    morestring=[b]',                            % Detect different strings
+    morestring=[b]""",                          % Detect different strings
+    keywordstyle = [2]{\color{variable}},       % Defined a second color and added words to be colored
+    morekeywords= [2] {                         % Adaptint Intelij style here
+        String, Boolean, Unit, EventTrait,
+        Any, in, awsAdapter, sink, queue,
+        client, devices, device}
   }
 
+% Using Light Monokai theme
 \lstdefinestyle{scala}{
-    xleftmargin=.05\textwidth,               % Center the listing
-    xrightmargin=.05\textwidth,              % Center the listing
-    frame=lrb,                        % Draw the shadowbox as frame
-    belowcaptionskip=-1pt,
-    rulecolor=\color{TUMBlue},                % Color of the frame
-    rulesepcolor=\color{TUMGray!50},        % Color of the shadow
-    language=scala,                			% choose the language of the code
-    numbers=left,                   		% where to put the line-numbers
-    stepnumber=1,                   		% the step between two line-numbers.        
-    numbersep=5pt,                  		% how far the line-numbers are from the code
-    numberstyle=\tiny\color{TUMGray},       % gray and tiny numbers
-    backgroundcolor=\color{background},  	% choose the background color. You must add \usepackage{color}
-    showspaces=false,               		% show spaces adding particular underscores
-    showstringspaces=false,         		% underline spaces within strings
-    showtabs=false,                 		% show tabs within strings adding particular underscores
-    tabsize=4,                      		% sets default tabsize to 4 spaces
-    captionpos=t,                   		% sets the caption-position to bottom
-    breaklines=true,                		% sets automatic line breaking
-    breakatwhitespace=true,         		% sets if automatic breaks should only happen at whitespace
-    title=\lstname,                 		% show the filename of files included with \lstinputlisting;
-    basicstyle=\color{normal}\ttfamily,		% sets font style for the code
-    keywordstyle=\color{keyword}\ttfamily,	% sets color for keywords
-    stringstyle=\color{string}\ttfamily,	% sets color for strings
-    commentstyle=\color{comment}\ttfamily,	% sets color for comments
-    procnamekeys={def, object, class},      % Highlight the function, class, object name
-    procnamestyle=\color{function}          % Color of the highlight
+    xleftmargin=.0075\textwidth,                % Center the listing
+    xrightmargin=.0075\textwidth,               % Center the listing
+    frame=tlrb,                                 % Draw the shadowbox as frame
+    belowcaptionskip=-1pt,                      % Bring text closer to listing
+    rulecolor=\color{TUMBlue},                  % Color of the frame
+    rulesepcolor=\color{TUMGray!50},            % Color of the shadow
+    language=scala,                			    % choose the language of the code
+    numbers=left,                   		    % where to put the line-numbers
+    stepnumber=1,                   		    % the step between two line-numbers.        
+    numbersep=7pt,                  		    % how far the line-numbers are from the code
+    numberstyle=\bfseries\footnotesize\color{TUMGray},   % small, grey, bold numbers
+    backgroundcolor=\color{background},  	    % choose the background color. You must add \usepackage{color}
+    showspaces=false,               		    % show spaces adding particular underscores
+    showstringspaces=false,         		    % underline spaces within strings
+    showtabs=false,                 		    % show tabs within strings adding particular underscores
+    tabsize=4,                      		    % sets default tabsize to 4 spaces
+    captionpos=b,                   		    % sets the caption-position to bottom
+    breaklines=true,                		    % sets automatic line breaking
+    breakatwhitespace=true,         		    % sets if automatic breaks should only happen at whitespace
+    autogobble,                                 % Automatically remove leading whitespaces
+    title=\lstname,                 		    % show the filename of files included with \lstinputlisting;
+    basicstyle=\color{normal}\ttfamily,		    % sets font style for the code
+    keywordstyle=\color{keyword}\ttfamily,	    % sets color for keywords
+    stringstyle=\color{string}\ttfamily,	    % sets color for strings
+    commentstyle=\color{comment}\ttfamily,	    % sets color for comments
+    procnamekeys={def, class},                  % Highlight the function, class, object name
+    procnamestyle=\color{function},             % Color of the highlight
+    escapechar=|,                               % Escape out to use commands
+    emph={"[..]"},
+    emphstyle={\itshape}
 }
 
-\DeclareCaptionFont{white}{\color{white}} 
-\DeclareCaptionFormat{listing}{% 
-  \colorbox{TUMBlue}{\parbox{\dimexpr0.9\textwidth+2\fboxsep-5pt\relax}{#1#2#3}}} 
-\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white} 
+% Using Light Monokai theme
+\lstdefinelanguage{json}{
+    morestring=[b]',                            % Detect different strings
+    morestring=[b]",                            % Detect different strings
+    morestring=[b]""",                          % Detect different strings
+    literate=
+     *{0}{{{\color{keyword}0}}}{1}              % Detect numbers
+      {1}{{{\color{keyword}1}}}{1}              % Detect numbers
+      {2}{{{\color{keyword}2}}}{1}              % Detect numbers
+      {3}{{{\color{keyword}3}}}{1}              % Detect numbers
+      {4}{{{\color{keyword}4}}}{1}              % Detect numbers
+      {5}{{{\color{keyword}5}}}{1}              % Detect numbers
+      {6}{{{\color{keyword}6}}}{1}              % Detect numbers
+      {7}{{{\color{keyword}7}}}{1}              % Detect numbers
+      {8}{{{\color{keyword}8}}}{1}              % Detect numbers
+      {9}{{{\color{keyword}9}}}{1}              % Detect numbers
+      {\{}{{{\color{TUMAccentBlue}{\{}}}}{1}    % Highlight brackets {
+      {\}}{{{\color{TUMAccentBlue}{\}}}}}{1}    % Highlight brackets }
+      {[}{{{\color{TUMAccentBlue}{[}}}}{1}      % Highlight brackets [
+      {]}{{{\color{TUMAccentBlue}{]}}}}{1},     % Highlight brackets ]
+}
+
+\lstdefinestyle{json}{   
+    emptylines=1,
+    escapechar=\%,
+    backgroundcolor=\color{background},  	    % choose the background color. You must add \usepackage{color}
+    stringstyle=\ttfamily\color{string},	    % sets color for strings
+    basicstyle=\color{normal}\ttfamily,		    % sets font style for the code
+    rulecolor=\color{TUMBlue},                  % Color of the frame
+    rulesepcolor=\color{TUMGray!50},            % Color of the shadow
+    xleftmargin=.01\textwidth,                  % Center the listing
+    frame=tlrb,                                 % Draw the shadowbox as frame
+    belowcaptionskip=-1pt,                      % Bring text closer to listing
+    language=json,                			    % choose the language of the code
+    showspaces=false,               		    % show spaces adding particular underscores
+    showstringspaces=false,         		    % dont underline spaces within strings
+    showtabs=false,                 		    % show tabs within strings adding particular underscores
+    tabsize=4,                      		    % sets default tabsize to 4 spaces
+    captionpos=b,                   		    % sets the caption-position to bottom
+    breaklines=true,                		    % sets automatic line breaking
+    breakatwhitespace=true,         		    % sets if automatic breaks should only happen at whitespace
+    title=\lstname,                 		    % show the filename of files included with \lstinputlisting;
+    autogobble                                  % Automatically remove leading whitespaces
+}

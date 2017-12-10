@@ -1,45 +1,45 @@
-\input{settings}
-
-\newcommand*{\getUniversity}{Technische Universität München}
-\newcommand*{\getFaculty}{Department of Informatics}
-\newcommand*{\getTitle}{Thesis title}
-\newcommand*{\getTitleGer}{Titel der Abschlussarbeit}
-\newcommand*{\getAuthor}{Author}
-\newcommand*{\getDoctype}{Thesis type (Bachelor's Thesis in Informatics, Master's Thesis in Robotics, \ldots)}
-\newcommand*{\getSupervisor}{Supervisor}
-\newcommand*{\getAdvisor}{Advisor}
-\newcommand*{\getSubmissionDate}{Submission date}
-\newcommand*{\getSubmissionLocation}{Munich}
-\newcommand*{\getDoctypeShort}{master's thesis}
+\input{settings}                                % Settings are in this file
+\input{commands}                                % Custom commands go here
 
 \begin{document}
 
 \pagenumbering{alph}
-\input{pages/cover}
+\input{pages/cover}                             % You shoudlnt need to touch this
 
 \frontmatter{}
+    \input{pages/title}                         % You shoudlnt need to touch this
+    \input{pages/disclaimer}                    % You shoudlnt need to touch this
+    \input{pages/acknowledgements}              % Your custom disclaimer   
+    \input{pages/abstract}                      % Your abstract
 
-\input{pages/title}
-\input{pages/disclaimer}
-\input{pages/acknowledgements}
-\input{pages/abstract}
-
-% Table of Contents
 \microtypesetup{protrusion=false}
-\tableofcontents{}
+\tableofcontents{}                              % Table of Contents
+\microtypesetup{protrusion=true}
+\mainmatter{}                                   % Main part of the thesis goes here
+    % Chapters go here
+    \input{chapters/01_introduction}
+
+    \listoftodos{}
+{
+    \glsaddallunused{}                              % Also show unused abreviations in the Glossary
+    \printglossaries{}                              % Show the glossary
+}
+\microtypesetup{protrusion=false}
+\listoffigures{}                                % print list of figure
+\listoftables{}                                 % Print list of tables
 \microtypesetup{protrusion=true}
 
-\mainmatter{}
+\begin{appendices}
+    \input{appendix/appendix_1}                 % Put your appendix here
+\end{appendices}
 
-\input{chapters/01_introduction}
+\nocite{*}                                      % Show everything in the bib
+\printbibliography{}                            % print the bibliography
 
-\appendix{}
-% Show everything in the bib
-\nocite{*}
-\microtypesetup{protrusion=false}
-\listoffigures{}
-\listoftables{}
-\microtypesetup{protrusion=true}
-\printbibliography{}
-
+\input{pages/cd}
 \end{document}
+
+
+% TODO:
+% Device representation
+% Letztes Kapitel

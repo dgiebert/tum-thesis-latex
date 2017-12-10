@@ -4,7 +4,7 @@
 \chapter{Introduction}\label{chapter:introduction}
 
 \section{Section}
-Citation test~\parencite{latex}.
+Citation test~\parencite{latex}. With a glossary test: \gls{api} and the second usage: \gls{api}\todo{Use references to the glossary everywhere}
 
 \subsection{Subsection}
 
@@ -111,3 +111,31 @@ object Test {
 \end{lstlisting}
 \label{overview}
 \end{minipage}
+
+\begin{filecontents}{testdata.dat}
+    x whiskerbottom boxbottom median boxtop whiskertop 
+    1 42            45        47     47.5   48 
+\end{filecontents}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis} [box plot width=2mm]
+        \boxplot [
+            forget plot,
+            box plot whisker bottom index=1,
+            box plot whisker top index=5,
+            box plot box bottom index=2,
+            box plot box top index=4,
+            box plot median index=3
+        ] {testdata.dat}
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Boxplot example}\label{fig:boxplot:example}
+\end{figure}
+
+\begin{figure}[!tbp]
+    \centering
+    \missingfigure{Add some figure here}
+    \caption{Example of missing figure}\label{fig:missing}
+\end{figure}

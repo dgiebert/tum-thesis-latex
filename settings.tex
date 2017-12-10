@@ -1,52 +1,62 @@
-\RequirePackage[l2tabu,orthodox]{nag}
+% Check: https://msu.edu/~amunn/latex/latex-guide.pdf
+\RequirePackage[l2tabu,orthodox]{nag}           % Detecting and warning about obsolete LATEX commands
 % Two-sided
-\documentclass[headsepline,footsepline,footinclude=false,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc,BCOR=12mm,DIV=12]{scrbook}
-% one-sided
-%\documentclass[headsepline,footsepline,footinclude=false,oneside,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc]{scrbook} 
-    
-\PassOptionsToPackage{table,svgnames,dvipsnames}{xcolor}
+% For one-sided remove BCOR & DIV and add onside instead
+\documentclass[
+    headsepline,                                % Line between header and text
+    footsepline,                                % Line between footer and tex
+    footinclude=false,
+    fontsize=11pt,                              % fontsize for the document
+    paper=a4,                                   % paper size
+    listof=totoc,                               % table of contents style
+    bibliography=totoc,                         % bibliography style
+    BCOR=12mm,                                  % Used for double sided (adds more space in the middle)
+    DIV=12                                      % Used for double sided
+]{scrbook}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[sc]{mathpazo}
-\usepackage[ngerman,american]{babel}
-\usepackage[autostyle]{csquotes}
-%input{styles/default}
-\input{styles/i17}
-\usepackage[american]{babel}
-\usepackage{graphicx}
-\usepackage{scrhack} % necessary for listings package
-\usepackage[procnames]{listings}
-\usepackage{lstautogobble}
-\usepackage{tikz}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\usepackage{booktabs}
-\usepackage[final]{microtype}
-\usepackage[justification=centering]{caption}
-\usepackage[hidelinks]{hyperref} % hidelinks removes colored boxes around references and links
-\usepackage{wrapfig} % Wrapfig for tables in text
+\usepackage[utf8]{inputenc}                     % Utf encoding
+\usepackage[T1]{fontenc}                        % Most western european symbols
+\usepackage[autostyle]{csquotes}                % Used for quotes
+\usepackage[hidelinks]{hyperref}                % hidelinks removes colored boxes around references and links
+\usepackage[american]{babel}                    % Sets the language to american (e.g., german, english)
+\usepackage{scrhack}                            % necessary for listings package
+\usepackage{booktabs}                           % Used for tables (midrule, toprule, bottomrule ...)
+\usepackage[justification=centering]{caption}   % Caption for tables and figures (centered)
+\usepackage{wrapfig}                            % Wrapfig for tables in text
+\usepackage{multicol}                           % Multiple columns
+\usepackage{enumitem}                           % Enumartions
+\usepackage{interval}                           % Used for intervals
+\usepackage{lipsum}                             % Useful as placeholder
+\usepackage[final]{microtype}                   % Optimization packages (typographical improvements)
+\usepackage[toc,page]{appendix}                 % Adds the appendices packages and adds it to the table of contents
+\usepackage{blindtext}                          % https://tex.stackexchange.com/questions/246804/centering-chapter-titles
+\input{config}
+% Custom styles and extensions go here:
+\input{styles/colors}                           % Custom colors go here
+\input{styles/i17}                              % Select the desired style
+%\input{styles/default}
+\input{styles/tikz}                             % Put your tikz settings here
+\input{styles/pgfplots}                         % Put your plot settings here
+\input{styles/math}                             % Put yout math settings and packages here
+\input{styles/lstlisting}                       % Put yout lstlisting settings here
+\input{styles/font}                             % Select your font here (Some options are available there already)
+\input{glossary}                                % Load nomenclature and glossary files
+\usepackage[colorinlistoftodos]{todonotes}                           % Possibility to add todonotes
 
-\bibliography{bibliography}
+\bibliography{bibliography}                     % Select bibliography file
 
 \setkomafont{disposition}{\normalfont\bfseries} % use serif font for headings
-\linespread{1.05} % adjust line spread for mathpazo font
-
-% Add table of contents to PDF bookmarks
-\BeforeTOCHead[toc]{{\cleardoublepage\pdfbookmark[0]{\contentsname}{toc}}}
-
-
-% Settings for pgfplots
-\pgfplotsset{compat=newest}
-\pgfplotsset{
-  % For available color names, see http://www.latextemplates.com/svgnames-colors
-  cycle list={TUMBlue\\TUMAccentOrange\\TUMAccentGreen\\TUMSecondaryBlue2\\TUMDarkGray\\},
+\linespread{1.05}                               % adjust line spread for mathpazo font
+\BeforeTOCHead[toc]{                            % Add table of contents to PDF bookmarks
+    {\cleardoublepage\pdfbookmark[0]{
+        \contentsname}{toc}
+    }
 }
 
-\usepackage{lipsum}
-
-% Use the colors
-\input{styles/colors}
-
-% Settings for lstlistings
-\input{styles/lstlisting}
+\hypersetup{                                    % Add pdfinfo
+    pdftitle    = {\getTitle},                  % Adds the title
+    pdfauthor   = {\getAuthor},                 % Adds the author
+    pdfsubject  = {\getDoctype},                % Currently the subject is the topic e.g., Master's Thesis in Informatics
+    pdfkeywords = {\getKeywords},               % Adds the keywords
+    linktoc=all,                                % Makes the toc clickable
+}

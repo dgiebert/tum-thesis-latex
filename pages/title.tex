@@ -1,26 +1,26 @@
 \begin{titlepage}
   \centering
 
-  \IfFileExists{logos/tum.pdf}{%
-    \includegraphics[height=20mm]{logos/tum.pdf}
+  \IfFileExists{logos/tum2.pdf}{%
+    \includegraphics[height=20mm]{logos/tum2.pdf}
   }{%
     \vspace*{20mm}
   }
 
   \vspace{5mm}
-  {\huge\MakeUppercase{\getFaculty{}}}\\
+  {\huge\MakeUppercase{\getFaculty}}\\
 
   \vspace{5mm}
-  {\large\MakeUppercase{\getUniversity{}}}\\
+  {\large\MakeUppercase{\getUniversity}}\\
 
   \vspace{20mm}
-  {\Large \getDoctype{}}
+  {\Large \getDoctype}
 
   \vspace{15mm}
-  {\huge\bfseries \getTitle{}}
+  {\huge\bfseries \getTitle}
 
   \vspace{10mm}
-  {\huge\bfseries \foreignlanguage{ngerman}{\getTitleGer{}}}
+  {\huge\bfseries \foreignlanguage{ngerman}{\getTitleGer}}
 
   \vspace{15mm}
   \begin{tabular}{l l}
@@ -31,7 +31,7 @@
   \end{tabular}
 
   \IfFileExists{logos/faculty.pdf}{%
-    \vfill{}
+    \vfill
     \includegraphics[height=20mm]{logos/faculty.pdf}
   }{}
 \end{titlepage}
