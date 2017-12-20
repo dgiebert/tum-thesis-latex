@@ -1,97 +1,60 @@
 % use \parencite for indirect citations at the end of the sentence/paragraph
 % use \textcite for direct citations
-% or use \posscite with 's
-% TODO: Journal with the format: name (pp. X-Y)
-% TODO: Write \easyfigure command with label and caption support
-\usepackage{xpatch}
-
 \usepackage[
   backend=biber,                                            % Backend for bibtex
   url=false,                                                % Removes url keyword
   style=apa,                                                % Style in the bibliography
-  citestyle=authoryear,                                     % Citation style: (Author Year)
-  maxnames=2,                                               % Maximum number in cittation (they do et. al always)
-  minnames=1,                                               % Minimum number in citation
+  citestyle=authoryear,                                     % Citation style
+  maxnames=2,                                               % Maximum number in citations in text (they do et. al always)
+  minnames=1,                                               % Minimum number in citation in text
   maxbibnames=99,                                           % Maximum number of authors listed in the bib
-  giveninits,                                               % Only shot the first name abbreviated 
-  uniquename=init,                                          % Only shot the first name abbreviated
+  giveninits,                                               % Only show the first name abbreviated
+  uniquename=init,                                          % Only show the first name abbreviated
   dashed=false,                                             % Get duplicated entries with different years
   doi=true,                                                 % Disable Dois
   isbn=false,                                               % Disable ISBN / ISSN
   date=year                                                 % Disable months in bibliography
 ]{biblatex}
-
-\DeclareLanguageMapping{american}{american-apa}             % I adapted the american apa
-\usefont{T1}{phv}{m}{sc}
-\setlength{\bibhang}{3em}                                   % Change the indentation for the second line
-\setlength\bibitemsep{1.5\itemsep}                          % Increase distance between bibtex entries
-\xpatchfieldformat{doi}{\mkbibacro{DOI}}{doi:}{}{}          % DOI: to doi:
+\renewcommand*{\nameyeardelim}{\addcomma\space}             % Adds a comma between author and year for parencite
+\DeclareLanguageMapping{british}{british-apa}               % I adapted the american apa
 \renewcommand*{\multinamedelim}{;\space}                    % Correct delimiter
 \renewcommand*{\finalnamedelim}{\space\&\space}             % Correct delimiter
-\renewcommand*{\nameyeardelim}{\space}                      % Disables the delimiter in parencite
 \renewrobustcmd*{\bibinitdelim}{}                           % Remove space between multiple first names
-\DeclareNameAlias{author}{last-first}                       % Correct Name order
-\DeclareFieldFormat[article]{volume}{Vol.\addnbspace{}#1}    % Adds the correct format for articles, opens the bracket
-\DeclareFieldFormat[article]{number}{No.\addnbspace{}#1}     % Adds the correct format for articles
 
-% Correct for books
-\renewbibmacro*{volume+number+eid}{
-  \printfield{volume}%
-  \setunit{\space}%
-  \printfield{year}%
-  \setunit{\space}%
-  \printfield{number}%
- \setunit{\addcomma\space}%
-  \printfield{eid}
+\captionsetup{labelfont=bf}                                 % Bold captions
+\renewcommand*{\figureformat}{\figurename~\thefigure}       % Remove and adds figurename trailing dot
+
+% ToC modifications
+\renewcommand{\lstlistingname}{Algorithm}                   % Change Listing to Algorithm
+\renewcommand{\lstlistlistingname}{List of \lstlistingname{}s}  % Change Listings  to List of Algorithms in ToC
+\renewcommand{\cftchapdotsep}{1}                            % Change the seperation between the dots for chapters
+\renewcommand{\cftdotsep}{1}                                % Change the speration between the dots for everything else
+
+% Tweaks for the list of tables, figures and listings
+\makeatletter
+\begingroup\let\newcounter\@gobble\let\setcounter\@gobbletwo
+  \globaldefs\@ne \let\c@loldepth\@ne
+  \newlistof{listings}{lol}{\lstlistlistingname}
+\endgroup
+\let\l@lstlisting\l@listings
+\makeatother
+
+\setlength{\cftlistingsindent}{1.5em}
+\renewcommand*{\cftlistingspresnum}{\lstlistingname~}
+\settowidth{\cftlistingsnumwidth}{\cftlistingspresnum}
+\addtolength{\cftlistingsnumwidth}{2em}                     % Tweak this for different length for lstlisting
+\addtolength{\cftfignumwidth}{2em}                          % Tweak this for different length for figures
+\addtolength{\cfttabnumwidth}{2em}                          % Tweak this for different length for tables
+\renewcommand{\cftlistingsaftersnum}{:}
+
+% Caption styling
+\captionsetup{%
+    format=plain,
+    justification=centering,
+    singlelinecheck=off
 }
 
-% Author is clickable when citing in text
-\DeclareCiteCommand{\citeauthor}
-{\boolfalse{citetracker}%
- \boolfalse{pagetracker}%
- \usebibmacro{prenote}}
-{\ifciteindex
-   {\indexnames{labelname}}
-   {}%
- \printtext[bibhyperref]{\printnames{labelname}}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
-
-% Same for citing the title
-\DeclareCiteCommand{\citetitle}
-{\boolfalse{citetracker}%
- \boolfalse{pagetracker}%
- \usebibmacro{prenote}}
-{\ifciteindex
-   {\indexfield{indextitle}}
-   {}%
- \printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
-
-% p for single and pp for mutlitple pages
-\DeclareFieldFormat{postnote}{#1}
-\DeclareFieldFormat{multipostnote}{#1}
-
-\renewcommand{\postnotedelim}{%
-  \iffieldpages{postnote}
-    {\addcolon\space}
-    {\addspace}}
-
-% Use this for Knuth's (1984) instead of Knuth (1984) THIS IS NOT TESTED VERY WELL
-\newcommand\posscite[1]{\citeauthor{#1}'s (\citeyear{#1})}
-
-% For usage with  authoryear-ibid
-%\xpretobibmacro{author}{\mkbibbold\bgroup}{}{}              % Bold authors
-%\xapptobibmacro{author}{\egroup}{}{}                        % Bold authors
-%\xpretobibmacro{bbx:editor}{\mkbibbold\bgroup}{}{}          % Bold authors
-%\xapptobibmacro{bbx:editor}{\egroup}{}{}                    % Bold authors
-%\renewcommand{\labelnamepunct}{\addcolon\space}             % Replaces period with colon
-%\DeclareFieldFormat{title}{#1}                              % Making the title and journal not italic
-%\DeclareFieldFormat{citetitle}{#1}                          % Making the title and journal not italic
-%\DeclareFieldFormat{journaltitle}{#1}                       % Making the title and journal not italic
-%\DeclareFieldFormat[article]{pages}{pp. #1)}                % Pages, closes the bracket
-%\DeclareFieldFormat[article]{year}{{(}#1{)}}                % Adds the correct format for articles
-%\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{citetitle}{#1}
-%\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1}
-%\DeclareFieldFormat[inbook,inproceedings]{pages}{(pp. #1)}  % Add parenthesis to pp in book an proceedings
+\DefineBibliographyStrings{english}{%                       % Renames Bibliography to References
+    bibliography = {References},
+    references = {References},
+}

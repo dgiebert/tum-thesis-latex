@@ -1,0 +1,28 @@
+\makeatletter
+% adapted from https://tex.stackexchange.com/a/33215/
+% ---- only needed for automatic title case ----
+\let\scr@chapter\chapter
+\let\scr@section\section
+\let\scr@subsection\subsection
+\let\scr@subsubsection\subsubsection
+\def\chapter{\@ifstar\cased@chapters\cased@chapter}
+\def\section{\@ifstar\cased@sections\cased@section}
+\def\subsection{\@ifstar\cased@subsections\cased@subsection}
+\def\subsubsection{\@ifstar\cased@subsubsections\cased@subsubsection}
+\def\cased@chapters#1{\scr@chapter*{\titlecap{#1}}}
+\def\cased@sections#1{\scr@section*{\titlecap{#1}}}
+\def\cased@subsections#1{\scr@subsection*{\titlecap{#1}}}
+\def\cased@subsubsections#1{\scr@subsubsection*{\titlecap{#1}}}
+\def\cased@chapter{\@dblarg{\cased@chapter@}}
+\def\cased@section{\@dblarg{\cased@section@}}
+\def\cased@subsection{\@dblarg{\cased@subsection@}}
+\def\cased@subsubsection{\@dblarg{\cased@subsubsection@}}
+\def\cased@chapter@[#1]#2{%
+  \scr@chapter[\titlecap{#1}]{\titlecap{#2}}}
+\def\cased@section@[#1]#2{%
+  \scr@section[\titlecap{#1}]{\titlecap{#2}}}
+\def\cased@subsection@[#1]#2{%
+  \scr@subsection[\titlecap{#1}]{\titlecap{#2}}}
+\def\cased@subsubsection@[#1]#2{%
+  \scr@subsubsection[\titlecap{#1}]{\titlecap{#2}}}
+\makeatother
