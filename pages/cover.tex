@@ -8,14 +8,14 @@
   \hsize=\textwidth\relax
 
   \centering
-
-  \IfFileExists{logos/tum.pdf}{%
-    \includegraphics[height=20mm]{logos/tum.pdf}
+  \vspace*{10mm}
+  \IfFileExists{logos/tum2.pdf}{%
+    \includegraphics[height=20mm]{logos/tum2.pdf}
   }{%
     \vspace*{20mm}
   }
 
-  \vspace{5mm}
+  \vspace{15mm}
   {\huge\MakeUppercase{\getFaculty}}\\
 
   \vspace{5mm}
@@ -24,14 +24,14 @@
   \vspace{20mm}
   {\Large \getDoctype}
 
-  \vspace{15mm}
+  \vfill
   {\huge\bfseries \getTitle}
 
-  \vspace{15mm}
+  \vfill
   {\LARGE \getAuthor}
 
+  \vfill
   \IfFileExists{logos/faculty.pdf}{%
-    \vfill
-    \includegraphics[height=20mm]{logos/faculty.pdf}
-  }{}
+    \includegraphics[height=25mm]{logos/faculty.pdf}
+  }{\vspace*{25mm}}
 \end{titlepage}

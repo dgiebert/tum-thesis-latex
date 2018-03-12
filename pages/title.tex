@@ -1,13 +1,13 @@
 \begin{titlepage}
   \centering
-
+  \vspace*{-12mm}
   \IfFileExists{logos/tum2.pdf}{%
     \includegraphics[height=20mm]{logos/tum2.pdf}
   }{%
     \vspace*{20mm}
   }
 
-  \vspace{5mm}
+  \vspace{15mm}
   {\huge\MakeUppercase{\getFaculty}}\\
 
   \vspace{5mm}
@@ -16,13 +16,13 @@
   \vspace{20mm}
   {\Large \getDoctype}
 
-  \vspace{15mm}
+  \vspace*{\fill}
   {\huge\bfseries \getTitle}
 
-  \vspace{10mm}
-  {\huge\bfseries \foreignlanguage{ngerman}{\getTitleGer}}
+  \vspace*{\fill}
+  {\huge\bfseries \getTitleGer}
 
-  \vspace{15mm}
+  \vspace*{\fill}
   \begin{tabular}{l l}
     Author:          & \getAuthor{} \\
     Supervisor:      & \getSupervisor{} \\
@@ -30,8 +30,10 @@
     Submission Date: & \getSubmissionDate{} \\
   \end{tabular}
 
+  \vspace*{\fill}
   \IfFileExists{logos/faculty.pdf}{%
-    \vfill
-    \includegraphics[height=20mm]{logos/faculty.pdf}
-  }{}
+    \includegraphics[height=25mm]{logos/faculty.pdf}
+  }{
+      \vspace*{25mm}
+    }
 \end{titlepage}

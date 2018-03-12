@@ -1,17 +1,15 @@
-{
-    \cleardoublepage% Move to first page of new chapter
-    \let\clearpage\relax% Don't allow page break
-    \begin{center}
-        \noindent\textbf{\huge\getTitle}
-    \end{center}
-    \vspace{0.25cm}
-    \begin{center}
-        \noindent\textbf{\Large\getAuthor}
-    \end{center}
-    \vspace{-1cm}
-    \chapter*{\centering \abstractname}
-} \noindent
+\cleardoublepage{}
+\thispagestyle{plain}
+\phantomsection{}
+\addcontentsline{toc}{chapter}{Abstract}
+\vspace*{\fill} % Macro for \null\vfill
+{\begin{center}
+    \huge\textbf{Abstract}
+\end{center}}
+\vspace*{0.05\textheight}
 
 Put your abstract here
 
 \noindent\textbf{Keywords}: \getKeywords{}
+\vfill % Keep this for centering
+\newpage
